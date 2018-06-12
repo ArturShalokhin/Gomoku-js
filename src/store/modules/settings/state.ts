@@ -1,11 +1,6 @@
-export interface Settings {
-	typePlayer: string,
-	currPlayer: string,
-	x: number,
-	y: number
-}
+import { SettingsState } from './types'
 
-export const state: Settings = {
+export const state: SettingsState = {
 	typePlayer: 'X',
 	currPlayer: 'X',
 	x: 50,

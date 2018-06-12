@@ -1,18 +1,17 @@
 import { Module } from 'vuex'
 // import { getters } from './getters'
-// import { actions } from './actions'
-// import { mutations } from './mutations'
-import { state, Settings } from './state'
+import { actions } from './actions'
+import { mutations } from './mutations'
+import { state } from './state'
 import { RootState } from '../../types'
+import { SettingsState } from './types'
 
 const namespaced: boolean = true
 
-const settings: Module<Settings, RootState> = {
+export const settings: Module<SettingsState, RootState> = {
     namespaced,
-    state
+    state,
+    actions,
+    mutations
     // getters,
-    // actions,
-    // mutations
 }
-
-export default settings
