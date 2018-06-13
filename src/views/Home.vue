@@ -7,17 +7,16 @@
     </div>
     <div class="settings">
       <div class="size-field">
-        <input :value="settings.x" type="number" @change="(e) => changeX(e.target.value)">
-        
-        <input :value="settings.y" type="number" @change="(e) => changeY(e.target.value)">
+        <input :value="settings.x" type="number" @change="handleChangeX">
+        <input :value="settings.y" type="number" @change="handleChangeY">
       </div>
       <div class="">
         <span>Выбрано: {{ settings.typePlayer }}</span>
         <br>
-        <input id="one" :checked="'X' === settings.typePlayer" type="radio" @change="changeTypePlayer('X')">
+        <input id="one" :checked="isTypePlayerEqualX" type="radio" @change="changeTypePlayer('X')">
         <label for="one">x</label>
         <br>
-        <input id="two" :checked="'O' === settings.typePlayer" type="radio" @change="changeTypePlayer('O')">
+        <input id="two" :checked="!isTypePlayerEqualX" type="radio" @change="changeTypePlayer('O')">
         <label for="two">o</label>
       </div>
     </div>
@@ -36,5 +35,17 @@ export default class Home extends Vue {
   @Action('changeTypePlayer', { namespace }) changeTypePlayer: any
   @Action('changeX', { namespace }) changeX: any
   @Action('changeY', { namespace }) changeY: any
+
+  handleChangeX (e: any): string {
+    return this.changeX(e.target.value)
+  }
+
+  handleChangeY (e: any): string {
+    return this.changeY(e.target.value)
+  }
+
+  get isTypePlayerEqualX (): boolean {
+    return this.settings.typePlayer === 'X'
+  }
 }
 </script>
