@@ -5,8 +5,7 @@ import { RootState } from '../../types'
 import * as types from './mutation-types'
 
 export const generateMap = ({ commit }: { commit: any }, payload: any): void => {
-	const map = [ ...Array(payload.x) ].map(e => Array(payload.y).fill(null))
-
+	const map = Array(payload.x).fill(null).map(() => Array(payload.y).fill(null))
 	commit(types.GENERATE_MAP, map)
 }
 
