@@ -1,3 +1,4 @@
 export interface GameState {
-	map: Array<Array<string|null>>
+	map: Array<Array<string|null>>,
+	currPlayer: string
 }

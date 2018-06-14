@@ -9,6 +9,11 @@ export const generateMap = ({ commit }: { commit: any }, payload: any): void => 
 	commit(types.GENERATE_MAP, map)
 }
 
+export const setValue = ({ commit }: { commit: any }, payload: any): void => {
+	commit(types.SET_VALUE, payload)
+}
+
 export const actions: ActionTree<GameState, RootState> = {
-  generateMap
+  generateMap,
+  setValue
 }

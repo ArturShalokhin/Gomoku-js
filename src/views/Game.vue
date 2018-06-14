@@ -1,6 +1,7 @@
 <template>
   <div class="about">
-    <h1>This is an game page</h1>
+    <h1>This is a game page</h1>
+    <Grid :map="game.map"/>
   </div>
 </template>
 
@@ -8,9 +9,15 @@
 import { Vue, Component } from 'vue-property-decorator'
 import { Action, State } from 'vuex-class'
 
+import Grid from '../components/Grid.vue'
+
 const namespace: string = 'game'
 
-@Component
+@Component({
+  components: {
+    Grid
+  }
+})
 export default class Game extends Vue {
   @State('game') game: any
   @State('settings') settings: any
@@ -19,11 +26,5 @@ export default class Game extends Vue {
   created () {
     this.generateMap({ x: this.settings.x, y: this.settings.y })
   }
-  // @Action('changeX', { namespace }) changeX: any
-  // @Action('changeY', { namespace }) changeY: any
-
-  // get isTypePlayerEqualX (): boolean {
-  //   return this.settings.typePlayer === 'X'
-  // }
 }
 </script>

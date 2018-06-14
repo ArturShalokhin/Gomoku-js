@@ -1,5 +1,6 @@
 import { GameState } from './types'
 
 export const state: GameState = {
-	map: []
+	map: [],
+	currPlayer: 'X'
 }
