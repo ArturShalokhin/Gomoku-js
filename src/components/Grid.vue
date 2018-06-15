@@ -1,7 +1,10 @@
 <template>
-	<div>
-		<div class="row" v-for="(row, indexRow) in map">
-			<div class="column" v-for="(column, index) in row" @click="setValue({ x: indexRow, y: index})">
+	<div id="game">
+		<div v-for="(row, indexRow) in map" v-bind:key="indexRow" class="row">
+			<div v-for="(column, index) in row"
+					v-bind:key="index"
+					class="column"
+			 		@click="setValue({ x: indexRow, y: index})">
 				<span>{{column}} </span>
 			</div>
 		</div>
@@ -17,15 +20,20 @@ const namespace: string = 'game'
 @Component
 export default class Grid extends Vue {
 	@Action('setValue', { namespace }) setValue: any
-
-	@Prop({default: []})
-  map: Array
+	@Prop({ default: [] })
+  map: Array<Array<string|null>>
 }
 </script>
 
 <style>
+#game {
+	display: inline-block;
+	margin: auto;
+	overflow: hidden;
+	user-select: none;
+}
 .row {
-	width: 150px;
+	width: 485px;
 }
 
 .column {
