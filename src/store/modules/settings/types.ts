@@ -1,4 +1,4 @@
-export interface SettingsState {
+export interface ISettingsState {
 	typePlayer: string;
 	x: number;
 	y: number;

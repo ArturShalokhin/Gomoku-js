@@ -1,13 +1,20 @@
+import { ICoords } from '@/types/index'
+
+interface ILine {
+	line: Array<string|number>;
+	coords: Array<ICoords>;
+}
+
 /**
  * Вертикальная линия хода
  *
  * @return object
  */
-export const getVerticalLine = (map, stepCoords): any => {
+export const getVerticalLine = (map: string[][], stepCoords: ICoords): ILine => {
 	const { x, y } = stepCoords
-	const countCell: number = 4
 	const line = []
 	const coords = []
+	const countCell: number = 4
 	const max: number = x + countCell
 	const min: number = x - countCell
 
@@ -26,13 +33,13 @@ export const getVerticalLine = (map, stepCoords): any => {
  *
  * @return object
  */
-export const getHorizontalLine = (map, stepCoords): any => {
+export const getHorizontalLine = (map: string[][], stepCoords: ICoords): ILine => {
 	const { x, y } = stepCoords
-	const countCell: number = 4
 	const line = []
 	const coords = []
-	const max = y + countCell
-	const min = y - countCell
+	const countCell: number = 4
+	const max: number = y + countCell
+	const min: number = y - countCell
 
 	for (let i = min; i <= max; i++) {
 		if (map[i]) {
@@ -49,14 +56,14 @@ export const getHorizontalLine = (map, stepCoords): any => {
  *
  * @return object
  */
-export const getDiagonalLeftLine = (map, stepCoords): any => {
+export const getDiagonalLeftLine = (map: string[][], stepCoords: ICoords): ILine => {
 	let { x, y } = stepCoords
-	const countCell: number = 4
 	const line = []
 	const coords = []
-	const maxX = x + countCell
-	let minX = x - countCell
-	let minY = y - countCell
+	const countCell: number = 4
+	const maxX: number = x + countCell
+	let minX: number = x - countCell
+	let minY: number = y - countCell
 
 	do {
 		if (map[minX]) {
@@ -75,14 +82,14 @@ export const getDiagonalLeftLine = (map, stepCoords): any => {
  *
  * @return object
  */
-export const getDiagonalRightLine = (map, stepCoords): any => {
+export const getDiagonalRightLine = (map: string[][], stepCoords: ICoords): ILine => {
 	let { x, y } = stepCoords
-	const countCell: number = 4
 	const line = []
 	const coords = []
-	const maxX = x + countCell
-	let minX = x - countCell
-	let maxY = y + countCell
+	const countCell: number = 4
+	const maxX: number = x + countCell
+	let minX: number = x - countCell
+	let maxY: number = y + countCell
 
 	do {
 		if (map[minX]) {
@@ -101,19 +108,20 @@ export const getDiagonalRightLine = (map, stepCoords): any => {
  *
  * @return boolean|array
  */
-export const checkIdenticalValues = (lineAndCoords: Array<string|null>, currPlayer: string): boolean => {
+export const checkIdenticalValues = (lineAndCoords: ILine, currPlayer: string): boolean|ICoords[] => {
 	const reg = new RegExp(`${currPlayer}{5}`, 'i')
-	const lineString = lineAndCoords.line.map((item) => item || 0).join('')
-	const indexSearch = lineString.search(reg) >= 0
-	if (indexSearch) {
-		const startSlice: number = indexSearch - 1
+	const lineString: string = lineAndCoords.line.map((item) => item || 0).join('')
+	const indexSearch: number = lineString.search(reg)
+	const isSearch: boolean = indexSearch >= 0
+	if (isSearch) {
+		const startSlice: number = indexSearch
 		const endSlice: number = indexSearch + 5
 		return lineAndCoords.coords.slice(startSlice, endSlice)
 	}
 	return false
 }
 
-export const checkWin = (map: Array<Array<string|null>>, coords: any, currPlayer: string): Array<any>|boolean => {
+export const checkWin = (map: string[][], coords: ICoords, currPlayer: string): boolean|ICoords[] => {
 	const verticalLine = getVerticalLine(map, coords)
 	const horizontalLine = getHorizontalLine(map, coords)
 	const diagonalLeftLine = getDiagonalLeftLine(map, coords)

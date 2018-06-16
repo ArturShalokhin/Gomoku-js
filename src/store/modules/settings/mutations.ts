@@ -1,13 +1,13 @@
 import { MutationTree } from 'vuex'
 
-import { SettingsState } from './types'
+import { ISettingsState } from './types'
 import {
   CHANGE_TYPE_PLAYER,
   CHANGE_X,
   CHANGE_Y
 } from './mutation-types'
 
-export const mutations: MutationTree<SettingsState> = {
+export const mutations: MutationTree<ISettingsState> = {
 	[CHANGE_TYPE_PLAYER] (state, payload: string) {
 		state.typePlayer = payload
 	},

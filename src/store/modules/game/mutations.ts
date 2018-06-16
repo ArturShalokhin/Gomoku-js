@@ -1,17 +1,19 @@
 import { MutationTree } from 'vuex'
 
-import { GameState } from './types'
+import { IGameState } from './types'
 import {
   GENERATE_MAP,
   SET_VALUE,
   CHANGE_PLAYER
 } from './mutation-types'
 
-export const mutations: MutationTree<GameState> = {
-	[GENERATE_MAP] (state, payload: Array<Array<string|null>>) {
+import { ICoords } from '@/types/index'
+
+export const mutations: MutationTree<IGameState> = {
+	[GENERATE_MAP] (state, payload: string[][]) {
 		state.map = [ ...payload ]
 	},
-	[SET_VALUE] (state, payload: any) {
+	[SET_VALUE] (state, payload: ICoords) {
 		state.map[payload.x][payload.y] = state.currPlayer
 		state.map = [...state.map]
 	},

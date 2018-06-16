@@ -1,6 +1,6 @@
 import { ActionTree } from 'vuex'
 
-import { SettingsState } from './types'
+import { ISettingsState } from './types'
 import { RootState } from '../../types'
 import * as types from './mutation-types'
 
@@ -16,7 +16,7 @@ export const changeY = ({ commit }: { commit: any }, payload: string): void => {
 	commit(types.CHANGE_Y, parseInt(payload))
 }
 
-export const actions: ActionTree<SettingsState, RootState> = {
+export const actions: ActionTree<ISettingsState, RootState> = {
   changeTypePlayer,
   changeX,
   changeY

@@ -1,6 +1,7 @@
 import { ActionTree } from 'vuex'
 
-import { GameState } from './types'
+import { ICoords } from '@/types/index'
+import { IGameState } from './types'
 import { RootState } from '../../types'
 import * as types from './mutation-types'
 import { checkWin as checkWinLib } from '@/utils/lib'
@@ -10,7 +11,7 @@ export const generateMap = ({ commit }: any, payload: any): void => {
 	commit(types.GENERATE_MAP, map)
 }
 
-export const setValue = ({ dispatch, commit, state }: any, coords: any): void => {
+export const setValue = ({ dispatch, commit, state }: any, coords: ICoords): void => {
 	const { x, y } = coords
 	if (!state.map[x][y]) {
 		commit(types.SET_VALUE, coords)
@@ -19,12 +20,12 @@ export const setValue = ({ dispatch, commit, state }: any, coords: any): void =>
 	dispatch('checkWin', { x, y })
 }
 
-export const changePlayer = ({ commit, state }: any, payload: any): void => {
+export const changePlayer = ({ commit, state }: any): void => {
 	const nextPlayer = state.currPlayer === 'X' ? 'O' : 'X'
 	commit(types.CHANGE_PLAYER, nextPlayer)
 }
 
-export const checkWin = ({ state }: any, coords: any): boolean => {
+export const checkWin = ({ state }: any, coords: ICoords): boolean => {
 	const map = [ ...state.map ]
 	const nextPlayer = state.currPlayer === 'X' ? 'O' : 'X'
 	const win = checkWinLib(map, coords, nextPlayer)
@@ -33,7 +34,7 @@ export const checkWin = ({ state }: any, coords: any): boolean => {
 	return true
 }
 
-export const actions: ActionTree<GameState, RootState> = {
+export const actions: ActionTree<IGameState, RootState> = {
   generateMap,
   setValue,
   changePlayer,

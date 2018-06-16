@@ -4,11 +4,11 @@ import { actions } from './actions'
 import { mutations } from './mutations'
 import { state } from './state'
 import { RootState } from '../../types'
-import { GameState } from './types'
+import { IGameState } from './types'
 
 const namespaced: boolean = true
 
-export const game: Module<GameState, RootState> = {
+export const game: Module<IGameState, RootState> = {
   namespaced,
   state,
   actions,

@@ -1,4 +1,4 @@
-export interface GameState {
-	map: Array<Array<string|null>>,
+export interface IGameState {
+	map: string[][],
 	currPlayer: string
 }

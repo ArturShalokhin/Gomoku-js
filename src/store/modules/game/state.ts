@@ -1,6 +1,6 @@
-import { GameState } from './types'
+import { IGameState } from './types'
 
-export const state: GameState = {
+export const state: IGameState = {
 	map: [],
 	currPlayer: 'X'
 }

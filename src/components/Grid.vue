@@ -20,8 +20,9 @@ const namespace: string = 'game'
 @Component
 export default class Grid extends Vue {
 	@Action('setValue', { namespace }) setValue: any
-	@Prop({ default: [] })
-  map: Array<Array<string|null>>
+
+	@Prop()
+	map: string[][]
 }
 </script>
 
