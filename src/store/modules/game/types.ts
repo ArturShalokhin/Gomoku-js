@@ -1,4 +1,5 @@
 export interface IGameState {
-	map: string[][],
-	currPlayer: string
+	map: string[][];
+	currPlayer: string;
+	isEndGame: boolean;
 }

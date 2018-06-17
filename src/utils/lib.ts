@@ -8,7 +8,7 @@ interface ILine {
 /**
  * Вертикальная линия хода
  *
- * @return object
+ * @return ILine
  */
 export const getVerticalLine = (map: string[][], stepCoords: ICoords): ILine => {
 	const { x, y } = stepCoords
@@ -31,7 +31,7 @@ export const getVerticalLine = (map: string[][], stepCoords: ICoords): ILine => 
 /**
  * Горизонтальная линия хода
  *
- * @return object
+ * @return ILine
  */
 export const getHorizontalLine = (map: string[][], stepCoords: ICoords): ILine => {
 	const { x, y } = stepCoords
@@ -42,7 +42,7 @@ export const getHorizontalLine = (map: string[][], stepCoords: ICoords): ILine =
 	const min: number = y - countCell
 
 	for (let i = min; i <= max; i++) {
-		if (map[i]) {
+		if (map[x]) {
 			line.push(map[x][i])
 			coords.push({ x, y: i })
 		}
@@ -54,7 +54,7 @@ export const getHorizontalLine = (map: string[][], stepCoords: ICoords): ILine =
 /**
  * Диагональная слева на право линия хода
  *
- * @return object
+ * @return ILine
  */
 export const getDiagonalLeftLine = (map: string[][], stepCoords: ICoords): ILine => {
 	let { x, y } = stepCoords
@@ -80,7 +80,7 @@ export const getDiagonalLeftLine = (map: string[][], stepCoords: ICoords): ILine
 /**
  * Диагональная справа на лево линия хода
  *
- * @return object
+ * @return ILine
  */
 export const getDiagonalRightLine = (map: string[][], stepCoords: ICoords): ILine => {
 	let { x, y } = stepCoords
@@ -106,7 +106,7 @@ export const getDiagonalRightLine = (map: string[][], stepCoords: ICoords): ILin
 /**
  * Проверяет линию на вин, если вин то возвращает победные координаты
  *
- * @return boolean|array
+ * @return boolean|ICoords[]
  */
 export const checkIdenticalValues = (lineAndCoords: ILine, currPlayer: string): boolean|ICoords[] => {
 	const reg = new RegExp(`${currPlayer}{5}`, 'i')
@@ -121,6 +121,11 @@ export const checkIdenticalValues = (lineAndCoords: ILine, currPlayer: string): 
 	return false
 }
 
+/**
+ * Проверка хода на победу
+ *
+ * @return boolean|ICoords[]
+ */
 export const checkWin = (map: string[][], coords: ICoords, currPlayer: string): boolean|ICoords[] => {
 	const verticalLine = getVerticalLine(map, coords)
 	const horizontalLine = getHorizontalLine(map, coords)
@@ -149,4 +154,8 @@ export const checkWin = (map: string[][], coords: ICoords, currPlayer: string): 
 	}
 
 	return false
+}
+
+export const generateMap = (x: number, y: number): string[][] => {
+	return Array(x).fill(null).map(() => Array(y).fill(null))
 }

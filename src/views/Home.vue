@@ -1,23 +1,27 @@
 <template>
   <div class="home">
-    <div class="play-game">
-      <router-link to="/game">
-        <span>play</span>
-      </router-link>
-    </div>
-    <div class="settings">
-      <div class="size-field">
-        <input :value="settings.x" type="number" @change="handleChangeX">
-        <input :value="settings.y" type="number" @change="handleChangeY">
+    <div class="home-container">
+      <h1>Крестики нолики (5 в ряд)</h1>
+      <div class="play-game">
+        <router-link to="/game" class="link">
+          <span>Играть</span>
+        </router-link>
       </div>
-      <div class="">
-        <span>Выбрано: {{ settings.typePlayer }}</span>
-        <br>
-        <input id="one" :checked="isTypePlayerEqualX" type="radio" @change="changeTypePlayer('X')">
-        <label for="one">x</label>
-        <br>
-        <input id="two" :checked="!isTypePlayerEqualX" type="radio" @change="changeTypePlayer('O')">
-        <label for="two">o</label>
+      <div class="settings">
+        <div class="size-field">
+          <div class="input-container">
+            <label>
+              <p>Клеток по вертикали</p>
+              <input :value="settings.x" type="number" @change="handleChangeX">
+            </label>
+            </div>
+          <div class="input-container">
+            <label>
+              <p>Клеток по горизонтали</p>
+              <input :value="settings.y" type="number" @change="handleChangeY">
+            </label>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -32,7 +36,6 @@ const namespace: string = 'settings'
 @Component
 export default class Home extends Vue {
   @State('settings') settings: any
-  @Action('changeTypePlayer', { namespace }) changeTypePlayer: any
   @Action('changeX', { namespace }) changeX: any
   @Action('changeY', { namespace }) changeY: any
 
@@ -49,3 +52,36 @@ export default class Home extends Vue {
   }
 }
 </script>
+
+<style lang="scss">
+  #app, body {
+    margin: 0;
+    user-select: none;
+  }
+
+  .home {
+    height: 80vh;
+    padding-top: 20vh;
+    background: #efe4e4;
+    overflow: hidden;
+  }
+
+  .home-container {
+    margin: auto;
+    width: 80%;
+  }
+
+  .link {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .input-container {
+    overflow: hidden;
+
+    label {
+      display: inline-block;
+    }
+  }
+</style>
